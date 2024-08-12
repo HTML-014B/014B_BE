@@ -1,10 +1,4 @@
 spring:
-  config:
-    activate:
-      on-profile: local
-    import:
-      - classpath:application.yml
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/HTML?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
