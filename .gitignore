@@ -1,3 +1,7 @@
+# yml 파일
+src/resources/application.yml
+.gradle
+
 # Compiled class file
 *.class
 
