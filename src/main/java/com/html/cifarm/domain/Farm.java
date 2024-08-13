@@ -1,5 +1,6 @@
 package com.html.cifarm.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.html.cifarm.annotation.Date;
 import com.html.cifarm.dto.type.FarmAmenities;
 import com.html.cifarm.dto.type.FarmStatus;
@@ -40,6 +41,7 @@ public class Farm {
     private List<FarmAmenities> farmAmenities;
 
     @OneToMany(mappedBy = "farm", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
     private List<FarmSlot> farmSlots = new ArrayList<>();
 
     @Column(name = "slot_count")

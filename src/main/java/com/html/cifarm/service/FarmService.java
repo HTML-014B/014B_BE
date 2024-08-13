@@ -6,6 +6,7 @@ import com.html.cifarm.domain.FarmUser;
 import com.html.cifarm.domain.User;
 import com.html.cifarm.dto.request.FarmCreateRequestDto;
 import com.html.cifarm.dto.response.FarmCreateResponseDto;
+import com.html.cifarm.dto.response.FarmSlotReadDto;
 import com.html.cifarm.exception.CommonException;
 import com.html.cifarm.exception.ErrorCode;
 import com.html.cifarm.repository.FarmRepository;
@@ -15,6 +16,9 @@ import com.html.cifarm.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -60,6 +64,13 @@ public class FarmService {
     public Farm getFarmById(Long id) {
         return farmRepository.findById(id)
                 .orElseThrow(()->new CommonException(ErrorCode.NOT_FOUND_FARM));
+    }
+
+    public List<FarmSlotReadDto> getFarmSlotsByFarmId(Long farmId) {
+        Farm farm = getFarmById(farmId);
+        return farm.getFarmSlots().stream()
+                .map(slot -> new FarmSlotReadDto(slot.getSlotId(), slot.getSlotNumber(), slot.getIsAvailable()))
+                .collect(Collectors.toList());
     }
 }
 
