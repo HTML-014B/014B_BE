@@ -1,5 +1,5 @@
 # yml 파일
-src/resources/application.yml
+application.yml
 .gradle
 
 # Compiled class file
