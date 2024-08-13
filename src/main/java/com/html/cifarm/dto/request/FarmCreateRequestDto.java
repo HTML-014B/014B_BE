@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.html.cifarm.dto.type.FarmAmenities;
 import com.html.cifarm.dto.type.FarmStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.relational.core.sql.In;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +20,8 @@ public record FarmCreateRequestDto(
         @JsonProperty("recruitmentCount") Integer recruitmentCount,
         @JsonProperty("recruitmentStartDate") LocalDateTime recruitmentStartDate,
         @JsonProperty("recruitmentEndDate") LocalDateTime recruitmentEndDate,
-        @JsonProperty("slotCount") Integer slotCount
+        @JsonProperty("slotCount") Integer slotCount,
+        @JsonProperty("slotPrice") Integer slotPrice,
+        @JsonProperty("dayPrice") Integer dayPrice
         ){
 }

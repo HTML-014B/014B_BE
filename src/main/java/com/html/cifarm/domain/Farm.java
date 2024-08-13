@@ -47,6 +47,12 @@ public class Farm {
     @Column(name = "slot_count")
     private Integer slotCount;
 
+    @Column(name = "slot_price")
+    private Integer slotPrice;
+
+    @Column(name="day_price")
+    private Integer dayPrice;
+
     @Column(name="recruitment_count")
     private Integer recruitmentCount;
 
@@ -65,13 +71,16 @@ public class Farm {
 
     @Builder
     public Farm(String farmText, Integer totalArea, FarmStatus status,
-                List<FarmAmenities> farmAmenities, Integer slotCount, Integer recruitmentCount, LocalDateTime recruitmentEndDate, LocalDateTime recruitmentStartDate, String farmImgUrl){
+                List<FarmAmenities> farmAmenities, Integer slotCount, Integer slotPrice, Integer dayPrice,
+                Integer recruitmentCount, LocalDateTime recruitmentEndDate, LocalDateTime recruitmentStartDate, String farmImgUrl){
         this.farmText = farmText;
         this.totalArea = totalArea;
         this.status = status;
         this.farmAmenities = farmAmenities;
         this.recruitmentCount = recruitmentCount;
         this.slotCount = slotCount;
+        this.slotPrice = slotPrice;
+        this.dayPrice = dayPrice;
         this.recruitmentStartDate = recruitmentStartDate;
         this.recruitmentEndDate = recruitmentEndDate;
         this.farmImgUrl = farmImgUrl;

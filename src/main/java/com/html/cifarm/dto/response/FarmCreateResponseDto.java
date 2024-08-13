@@ -7,6 +7,7 @@ import com.html.cifarm.dto.type.FarmAmenities;
 import com.html.cifarm.dto.type.FarmStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
+import org.springframework.data.relational.core.sql.In;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +26,9 @@ public record FarmCreateResponseDto (
         LocalDateTime recruitmentEndDate,
         String farmImgUrl,
         LocalDateTime createdAt,
-        Integer slotCount
+        Integer slotCount,
+        Integer slotPrice,
+        Integer dayPrice
 ){
     public static FarmCreateResponseDto fromEntity(Farm farm) {
 
@@ -41,6 +44,8 @@ public record FarmCreateResponseDto (
                 .farmImgUrl(farm.getFarmImgUrl())
                 .createdAt(farm.getCreatedAt())
                 .slotCount(farm.getSlotCount())
+                .slotPrice(farm.getSlotPrice())
+                .dayPrice(farm.getDayPrice())
                 .build();
     }
 }
