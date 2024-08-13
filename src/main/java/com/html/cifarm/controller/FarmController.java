@@ -20,7 +20,7 @@ public class FarmController {
     @PostMapping("")
     public ResponseDto<?> createFarm(@UserId Long userId, @RequestBody FarmCreateRequestDto farmCreateRequestDto) {
 
-        FarmCreateResponseDto farmCreateResponseDto = farmService.createFarm(farmCreateRequestDto);
+        FarmCreateResponseDto farmCreateResponseDto = farmService.createFarm(userId, farmCreateRequestDto);
 
         return ResponseDto.ok(farmCreateResponseDto);
     }
