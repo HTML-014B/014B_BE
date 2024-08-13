@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
@@ -30,9 +32,11 @@ public class Farm {
     @Enumerated(EnumType.STRING)
     private FarmStatus status;
 
-    @Column(name="farm_amenities")
+    @ElementCollection(targetClass = FarmAmenities.class)
+    @CollectionTable(name = "farm_amenities", joinColumns = @JoinColumn(name = "farm_id"))
     @Enumerated(EnumType.STRING)
-    private FarmAmenities farmAmenities;
+    @Column(name = "amenity")
+    private List<FarmAmenities> farmAmenities;
 
     @Column(name="recruitment_count")
     private Integer recruitmentCount;
@@ -52,7 +56,7 @@ public class Farm {
 
     @Builder
     public Farm(String farmText, Integer totalArea, FarmStatus status,
-                FarmAmenities farmAmenities, Integer recruitmentCount, LocalDateTime recruitmentEndDate, LocalDateTime recruitmentStartDate, String farmImgUrl){
+                List<FarmAmenities> farmAmenities, Integer recruitmentCount, LocalDateTime recruitmentEndDate, LocalDateTime recruitmentStartDate, String farmImgUrl){
         this.farmText = farmText;
         this.totalArea = totalArea;
         this.status = status;
