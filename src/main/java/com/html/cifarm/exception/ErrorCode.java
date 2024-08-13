@@ -20,6 +20,7 @@ public enum ErrorCode {
     NOT_FOUND_POST(40403, HttpStatus.NOT_FOUND, "해당 게시글이 존재하지 않습니다."),
     NOT_FOUND_COMMENT(40404, HttpStatus.NOT_FOUND, "해당 댓글이 존재하지 않습니다."),
     NOT_FOUND_FARM(40405, HttpStatus.NOT_FOUND, "해당 농장이 존재하지 않습니다."),
+    NOT_FOUND_FARM_ADDRESS(40406, HttpStatus.NOT_FOUND, "해당 농장에 해당하는 농장 주소가 존재하지 않습니다."),
 
     // Invalid Argument Error
     MISSING_REQUEST_PARAMETER(40000, HttpStatus.BAD_REQUEST, "필수 요청 파라미터가 누락되었습니다."),

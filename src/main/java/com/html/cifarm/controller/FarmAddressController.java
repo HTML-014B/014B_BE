@@ -6,6 +6,7 @@ import com.html.cifarm.dto.response.FarmAddressResponseDto;
 import com.html.cifarm.service.FarmAddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +27,10 @@ public class FarmAddressController {
         FarmAddressResponseDto farmAddressResponseDto=farmAddressService.saveFarmAddress(farmId, farmAddressRequestDto);
 
         return ResponseDto.ok(farmAddressResponseDto);
+    }
+
+    @GetMapping("/{farmId}")
+    public ResponseDto<?> getFarmAddress(@PathVariable Long farmId){
+        return ResponseDto.ok(farmAddressService.getFarmAddress(farmId));
     }
 }

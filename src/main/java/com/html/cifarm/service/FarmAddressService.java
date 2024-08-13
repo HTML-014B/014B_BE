@@ -2,6 +2,8 @@ package com.html.cifarm.service;
 
 import com.html.cifarm.domain.FarmAddress;
 import com.html.cifarm.domain.Farm;
+import com.html.cifarm.exception.CommonException;
+import com.html.cifarm.exception.ErrorCode;
 import com.html.cifarm.repository.FarmAddressRepository;
 import com.html.cifarm.repository.FarmRepository;
 import com.html.cifarm.dto.response.FarmAddressResponseDto;
@@ -32,5 +34,10 @@ public class FarmAddressService {
         FarmAddress savedAddress = farmAddressRepository.save(farmAddress);
 
         return FarmAddressResponseDto.fromEntity(savedAddress);
+    }
+
+    public FarmAddress getFarmAddress(Long farmId) {
+        return farmAddressRepository.findByFarmId(farmId)
+                .orElseThrow(()->new CommonException(ErrorCode.NOT_FOUND_FARM_ADDRESS));
     }
 }
