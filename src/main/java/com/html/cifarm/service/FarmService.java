@@ -36,7 +36,6 @@ public class FarmService {
                 .recruitmentStartDate(requestDto.recruitmentStartDate())
                 .recruitmentEndDate(requestDto.recruitmentEndDate())
                 .slotCount(requestDto.slotCount())
-                .slotPrice(requestDto.slotPrice())
                 .dayPrice(requestDto.dayPrice())
                 .build();
 

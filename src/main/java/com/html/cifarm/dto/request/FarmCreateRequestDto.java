@@ -21,7 +21,6 @@ public record FarmCreateRequestDto(
         @JsonProperty("recruitmentStartDate") LocalDateTime recruitmentStartDate,
         @JsonProperty("recruitmentEndDate") LocalDateTime recruitmentEndDate,
         @JsonProperty("slotCount") Integer slotCount,
-        @JsonProperty("slotPrice") Integer slotPrice,
         @JsonProperty("dayPrice") Integer dayPrice
         ){
 }

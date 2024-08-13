@@ -27,7 +27,6 @@ public record FarmCreateResponseDto (
         String farmImgUrl,
         LocalDateTime createdAt,
         Integer slotCount,
-        Integer slotPrice,
         Integer dayPrice
 ){
     public static FarmCreateResponseDto fromEntity(Farm farm) {
@@ -44,7 +43,6 @@ public record FarmCreateResponseDto (
                 .farmImgUrl(farm.getFarmImgUrl())
                 .createdAt(farm.getCreatedAt())
                 .slotCount(farm.getSlotCount())
-                .slotPrice(farm.getSlotPrice())
                 .dayPrice(farm.getDayPrice())
                 .build();
     }
