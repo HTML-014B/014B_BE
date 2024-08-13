@@ -1,18 +1,13 @@
 package com.html.cifarm.service;
 
-import com.html.cifarm.domain.Farm;
-import com.html.cifarm.domain.FarmSlot;
-import com.html.cifarm.domain.FarmUser;
-import com.html.cifarm.domain.User;
+import com.html.cifarm.domain.*;
 import com.html.cifarm.dto.request.FarmCreateRequestDto;
 import com.html.cifarm.dto.response.FarmCreateResponseDto;
 import com.html.cifarm.dto.response.FarmSlotReadDto;
 import com.html.cifarm.exception.CommonException;
 import com.html.cifarm.exception.ErrorCode;
-import com.html.cifarm.repository.FarmRepository;
-import com.html.cifarm.repository.FarmSlotRepository;
-import com.html.cifarm.repository.FarmUserRepository;
-import com.html.cifarm.repository.UserRepository;
+import com.html.cifarm.repository.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +21,7 @@ public class FarmService {
     private final FarmRepository farmRepository;
     private final UserRepository userRepository;
     private final FarmUserRepository farmUserRepository;
-    private final FarmSlotRepository farmSlotRepository;
+    private final FarmAddressRepository farmAddressRepository;
 
     @Transactional
     public FarmCreateResponseDto createFarm(Long userId, FarmCreateRequestDto requestDto) {
@@ -72,5 +67,12 @@ public class FarmService {
                 .map(slot -> new FarmSlotReadDto(slot.getSlotId(), slot.getSlotNumber(), slot.getIsAvailable()))
                 .collect(Collectors.toList());
     }
-}
+
+
+    public FarmAddress getFarmAddressByFarmId(Long farmId) {
+        return farmAddressRepository.findByFarmId(farmId)
+                .orElseThrow(() -> new EntityNotFoundException("FarmAddress not found for farmId: " + farmId));
+    }
+
+    }
 

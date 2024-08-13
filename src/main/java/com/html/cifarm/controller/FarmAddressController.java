@@ -1,8 +1,10 @@
 package com.html.cifarm.controller;
 
 import com.html.cifarm.domain.Farm;
+import com.html.cifarm.domain.FarmAddress;
 import com.html.cifarm.dto.global.ResponseDto;
 import com.html.cifarm.dto.request.FarmAddressRequestDto;
+import com.html.cifarm.dto.response.FarmAddressReadDto;
 import com.html.cifarm.dto.response.FarmAddressResponseDto;
 import com.html.cifarm.dto.response.FarmDetailDto;
 import com.html.cifarm.dto.response.FarmSlotReadDto;
@@ -37,23 +39,9 @@ public class FarmAddressController {
     }
 
     @GetMapping("/{farmId}")
-    public ResponseDto<?> getFarmDetails(@PathVariable Long farmId) {
-        Farm farm = farmService.getFarmById(farmId);
-        List<FarmSlotReadDto> farmSlotDtos = farmService.getFarmSlotsByFarmId(farmId);
-
-        // Farm 객체와 FarmSlotDto 리스트를 포함한 응답 객체 생성
-        return ResponseDto.ok(new FarmDetailDto(
-                farm.getId(),
-                farm.getFarmText(),
-                farm.getTotalArea(),
-                farm.getStatus(),
-                farm.getFarmAmenities(),
-                farm.getSlotCount(),
-                farm.getRecruitmentCount(),
-                farm.getRecruitmentStartDate(),
-                farm.getRecruitmentEndDate(),
-                farm.getFarmImgUrl(),
-                farm.getCreatedAt(),
-                farmSlotDtos));
+    public ResponseDto<FarmAddressReadDto> getFarmAddress(@PathVariable Long farmId) {
+        FarmAddress farmAddress=farmAddressService.getFarmAddressByFarmId(farmId);
+        FarmAddressReadDto farmAddressReadDto = new FarmAddressReadDto(farmId, farmAddress.getLongitude(), farmAddress.getLatitude(), farmAddress.getRegion2depthName());
+        return ResponseDto.ok(farmAddressReadDto);
     }
 }

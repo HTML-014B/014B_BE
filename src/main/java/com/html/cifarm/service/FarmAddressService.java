@@ -36,7 +36,7 @@ public class FarmAddressService {
         return FarmAddressResponseDto.fromEntity(savedAddress);
     }
 
-    public FarmAddress getFarmAddress(Long farmId) {
+    public FarmAddress getFarmAddressByFarmId(Long farmId) {
         return farmAddressRepository.findByFarmId(farmId)
                 .orElseThrow(()->new CommonException(ErrorCode.NOT_FOUND_FARM_ADDRESS));
     }
