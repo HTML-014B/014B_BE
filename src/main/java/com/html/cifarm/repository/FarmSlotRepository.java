@@ -10,4 +10,7 @@ public interface FarmSlotRepository extends JpaRepository<FarmSlot, Long> {
     List<FarmSlot> findByFarmId(Long farmId);
 
     List<FarmSlot> findBySlotNumberIn(List<Integer> slotNumbers);
+
+    List<FarmSlot> findByFarmIdAndSlotNumberIn(Long farmId, List<Integer> slotNumbers);
+
 }

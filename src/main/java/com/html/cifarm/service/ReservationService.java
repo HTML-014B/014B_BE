@@ -26,10 +26,10 @@ public class ReservationService {
     private final UserRepository userRepository;
 
     @Transactional
-    public ReservationResponseDto selectSlots(List<Integer> slotNumbers,
-                                              Long userId, LocalDate rentalStartDate,
-                                              LocalDate rentalEndDate) {
-        List<FarmSlot> slots = farmSlotRepository.findBySlotNumberIn(slotNumbers);
+    public ReservationResponseDto selectSlots(Long farmId, List<Integer> slotNumbers, Long userId) {
+
+        // 지정된 농장에서 선택된 슬롯 번호로 슬롯 조회
+        List<FarmSlot> slots = farmSlotRepository.findByFarmIdAndSlotNumberIn(farmId, slotNumbers);
 
         if (slots.isEmpty()) {
             throw new RuntimeException("선택한 구획이 없습니다.");
@@ -59,9 +59,7 @@ public class ReservationService {
             Reservation reservation = Reservation.builder()
                     .farmUser(farmUser) // 기존 FarmUser 객체 사용
                     .slotId(slotNumber) // 선택한 슬롯 ID 저장
-                    .rentalStartDate(rentalStartDate)
-                    .rentalEndDate(rentalEndDate)
-                    .totalPrice(totalPrice)
+                    // 날짜는 나중에 날짜 선택 API에서 처리
                     .build();
 
             reservationRepository.save(reservation);
@@ -70,16 +68,19 @@ public class ReservationService {
         return new ReservationResponseDto(totalSlots, totalArea, totalPrice);
     }
 
+    public int calculateTotalPrice(Long farmId, List<Integer> slotNumbers, LocalDate rentalStartDate, LocalDate rentalEndDate) {
+        // 해당 농장에서 선택된 슬롯 번호로 슬롯 조회
+        List<FarmSlot> slots = farmSlotRepository.findByFarmIdAndSlotNumberIn(farmId, slotNumbers);
 
-    public int calculateTotalPrice(List<Integer> slotNumbers, LocalDate rentalStartDate, LocalDate rentalEndDate) {
-        long days = ChronoUnit.DAYS.between(rentalStartDate, rentalEndDate);
-        if (days <= 0) {
-            throw new RuntimeException("유효한 대여 기간이 아닙니다.");
+        if (slots.isEmpty()) {
+            throw new RuntimeException("선택한 슬롯이 농장에 존재하지 않습니다.");
         }
 
-        List<FarmSlot> slots = farmSlotRepository.findBySlotNumberIn(slotNumbers);
+        // 총 금액 계산 (예를 들어, 대여 기간에 따라 가격을 조정할 수 있음)
         int totalPrice = slots.stream().mapToInt(FarmSlot::getSlotPrice).sum();
+        int rentalDays = (int) ChronoUnit.DAYS.between(rentalStartDate, rentalEndDate) + 1; // 대여일 수 계산
 
-        return totalPrice * (int) days;
+        return totalPrice * rentalDays; // 총 금액 반환
     }
+
 }

@@ -7,8 +7,7 @@ import java.util.List;
 
 @Getter
 public class ReservationRequestDto {
+    private Long farmId;
     private List<Integer> slotNumbers;
     private Long userId;
-    private LocalDate rentalStartDate;
-    private LocalDate rentalEndDate;
 }

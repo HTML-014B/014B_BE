@@ -9,7 +9,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CalculatePriceRequest {
+public class CalculatePriceRequestDto {
+    private Long farmId;
     private List<Integer> slotNumbers;
     private LocalDate rentalStartDate;
     private LocalDate rentalEndDate;
