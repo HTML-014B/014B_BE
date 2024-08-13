@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class FarmAddressService {
 
-    private FarmAddressRepository farmAddressRepository;
-    private FarmRepository farmRepository;
+    private final FarmAddressRepository farmAddressRepository;
+    private final FarmRepository farmRepository;
 
     @Transactional
     public FarmAddressResponseDto saveFarmAddress(Long farmId, FarmAddressRequestDto requestDto) {
