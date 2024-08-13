@@ -14,6 +14,7 @@ import com.html.cifarm.utility.CookieUtil;
 import com.html.cifarm.utility.HeaderUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Auth", description = "인증관련 API")
 @RequestMapping("/api/v1")
 public class AuthController {
     private final AuthService authService;
@@ -46,8 +48,8 @@ public class AuthController {
         return ResponseDto.ok(null);
     }
 
-    @PostMapping("/oauth/login")
-    @Operation(summary = "소셜로그인", description = "클라이언트 사이드 인증을 통한 소셜 로그인")
+    @PostMapping("/auth/login")
+    @Operation(summary = "로그인", description = "클라이언트 사이드 인증을 통한 로그인")
     @Schema(name = "login", description = "로그인")
     public ResponseDto<?> login(@RequestBody OauthLoginDto userloginDto) {
         return ResponseDto.ok(authService.login(userloginDto));
