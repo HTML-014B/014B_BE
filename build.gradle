@@ -22,7 +22,6 @@ dependencies {
 	// Database
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'mysql:mysql-connector-java:8.0.32'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:3.3.2'
 

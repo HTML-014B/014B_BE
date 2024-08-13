@@ -7,13 +7,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+      dialect: org.hibernate.dialect.MYSQLDialect
     properties:
       hibernate:
         default_batch_fetch_size: 100
         show_sql: true
         format_sql: true
-      database-platform: org.hibernate.dialect.MYSQLDialect
+      database-platform: org.hibernate.dialect.MySQL8Dialect
 
   servlet:
     multipart:
@@ -68,6 +69,12 @@ logging:
   level:
     org.springframework.security: debug
     web: debug
+
+cloud:
+  aws:
+    credentials:
+    s3:
+      bucket: "014bucket"
 
 server:
   http-address: http://localhost:8080
