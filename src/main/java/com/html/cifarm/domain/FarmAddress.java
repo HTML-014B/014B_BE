@@ -23,9 +23,9 @@ public class FarmAddress {
     @JoinColumn(name="farm_id", nullable=false)
     private Farm farm;
 
-    private Float latitude;
+    private double latitude;
 
-    private Float longitude;
+    private double longitude;
 
     private String region2depthName;
 
@@ -34,7 +34,7 @@ public class FarmAddress {
     private LocalDateTime createdAt;
 
     @Builder
-    public FarmAddress(Farm farm, Float latitude, Float longitude, String region2depthName) {
+    public FarmAddress(Farm farm, double latitude, double longitude, String region2depthName) {
         this.farm = farm;
         this.latitude = latitude;
         this.longitude = longitude;
