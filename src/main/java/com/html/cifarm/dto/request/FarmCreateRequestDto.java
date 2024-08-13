@@ -18,6 +18,7 @@ public record FarmCreateRequestDto(
         @JsonProperty("farmAmenities") List<FarmAmenities> farmAmenities,
         @JsonProperty("recruitmentCount") Integer recruitmentCount,
         @JsonProperty("recruitmentStartDate") LocalDateTime recruitmentStartDate,
-        @JsonProperty("recruitmentEndDate") LocalDateTime recruitmentEndDate
+        @JsonProperty("recruitmentEndDate") LocalDateTime recruitmentEndDate,
+        @JsonProperty("slotCount") Integer slotCount
         ){
 }
